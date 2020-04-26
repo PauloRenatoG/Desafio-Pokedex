@@ -1,2 +1,4 @@
 rootProject.name='Desafio Pokedex'
-include ':app'
+include ':presentation'
+include ':data'
+include ':domain'
