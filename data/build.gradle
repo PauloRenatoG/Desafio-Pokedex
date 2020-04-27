@@ -20,6 +20,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_ENDPOINT", "\"$rootProject.ext.apiRelease/\""
+        }
+        debug {
+            buildConfigField "String", "API_ENDPOINT", "\"$rootProject.ext.apiStaging/\""
         }
     }
 

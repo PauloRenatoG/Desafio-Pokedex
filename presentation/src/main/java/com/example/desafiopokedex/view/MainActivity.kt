@@ -1,11 +1,12 @@
-package com.example.desafiopokedex
+package com.example.desafiopokedex.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.example.desafiopokedex.R
 import com.example.desafiopokedex.databinding.ActivityMainBinding
+import com.example.desafiopokedex.view.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
