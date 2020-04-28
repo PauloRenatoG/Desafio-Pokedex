@@ -3,7 +3,7 @@ package com.example.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class StatX(
+data class ApiTypeUrl(
     @SerializedName("name")
     val name: String? = null,
     @SerializedName("url")

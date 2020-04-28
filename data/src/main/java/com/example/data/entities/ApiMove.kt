@@ -3,9 +3,9 @@ package com.example.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class Move(
+data class ApiMove(
     @SerializedName("move")
-    val move: MoveX? = null,
+    val move: ApiMoveUrl? = null,
     @SerializedName("version_group_details")
-    val versionGroupDetails: List<VersionGroupDetail>? = null
+    val versionGroupDetails: List<ApiVersionGroupDetail>? = null
 )

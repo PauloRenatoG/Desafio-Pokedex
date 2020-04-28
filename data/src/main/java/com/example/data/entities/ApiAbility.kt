@@ -3,9 +3,9 @@ package com.example.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class Ability(
+data class ApiAbility(
     @SerializedName("ability")
-    val ability: AbilityX? = null,
+    val ability: ApiAbilityUrl? = null,
     @SerializedName("is_hidden")
     val isHidden: Boolean? = null,
     @SerializedName("slot")

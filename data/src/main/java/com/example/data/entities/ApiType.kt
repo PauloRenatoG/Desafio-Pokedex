@@ -3,9 +3,9 @@ package com.example.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class Type(
+data class ApiType(
     @SerializedName("slot")
     val slot: Int? = null,
     @SerializedName("type")
-    val type: TypeX? = null
+    val type: ApiTypeUrl? = null
 )

@@ -3,9 +3,9 @@ package com.example.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class HeldItem(
+data class ApiHeldItem(
     @SerializedName("item")
-    val item: Item? = null,
+    val item: ApiItemUrl? = null,
     @SerializedName("version_details")
-    val versionDetails: List<VersionDetail>? = null
+    val versionDetails: List<ApiVersionDetail>? = null
 )

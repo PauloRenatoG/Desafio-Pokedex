@@ -3,7 +3,7 @@ package com.example.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class HeldItems(
+data class ApiHeldItems(
     @SerializedName("held_items")
-    val heldItems: List<HeldItem>? = null
+    val heldItems: List<ApiHeldItem>? = null
 )
