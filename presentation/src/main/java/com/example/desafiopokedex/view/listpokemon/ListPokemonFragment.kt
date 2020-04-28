@@ -41,6 +41,11 @@ class ListPokemonFragment : BaseFragment() {
         viewModel.listPokemon.observe(viewLifecycleOwner, Observer { list ->
             adapterList.submitList(list)
         })
+
+        viewModel.loadingProgressBar.observe(viewLifecycleOwner, Observer { loading ->
+            if (loading) binding.progressLoading.visibility = View.VISIBLE
+            else binding.progressLoading.visibility = View.GONE
+        })
     }
 
     private fun setupRecycler() {
