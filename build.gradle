@@ -38,6 +38,12 @@ buildscript {
         // Retrofit
         retrofitVersion = '2.7.1'
 
+        // Paging
+        pagingVersion = '2.1.2'
+
+        // Glide
+        glideVersion = '4.11.0'
+
         //Tests
         junitVersion = '4.12'
         junitExtVersion = '1.1.1'
