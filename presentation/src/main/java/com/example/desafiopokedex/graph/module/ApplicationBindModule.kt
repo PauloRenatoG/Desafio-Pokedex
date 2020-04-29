@@ -5,6 +5,7 @@ import com.example.data.repository.GetListResultRepositoryImpl
 import com.example.data.repository.GetSpritesRepositoryImpl
 import com.example.desafiopokedex.view.base.ViewModelFactory
 import com.example.domain.repository.GetListResultRepository
+import com.example.domain.repository.GetPokemonDetailRepository
 import com.example.domain.repository.GetSpritesRepository
 import dagger.Binds
 import dagger.Module
@@ -17,6 +18,9 @@ interface ApplicationBindModule {
 
     @Binds
     fun bindsGetSpritesRepository(repository: GetSpritesRepositoryImpl): GetSpritesRepository
+
+    @Binds
+    fun bindsGetPokemonDetailRepository(repository: GetPokemonDetailRepository): GetPokemonDetailRepository
 
     @Binds
     fun bindsViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
