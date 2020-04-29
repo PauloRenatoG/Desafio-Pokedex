@@ -124,4 +124,29 @@ interface MapperModule {
     fun bindsApiTypeUrlToTypeUrlMapper(
         mapper: ApiTypeUrlToTypeUrlMapper
     ): Mapper<ApiTypeUrl, TypeUrl>
+
+    @Binds
+    fun bindsApiEffectEntriesToEffectEntriesMapper(
+        mapper: ApiEffectEntriesToEffectEntriesMapper
+    ): Mapper<ApiEffectEntries, EffectEntries>
+
+    @Binds
+    fun bindsApiEffectEntryToEffectEntryMapper(
+        mapper: ApiEffectEntryToEffectEntryMapper
+    ): Mapper<ApiEffectEntry, EffectEntry>
+
+    @Binds
+    fun bindsApiListPokemonTypeToListPokemonTypeMapper(
+        mapper: ApiListPokemonTypeToListPokemonTypeMapper
+    ): Mapper<ApiListPokemonType, ListPokemonType>
+
+    @Binds
+    fun bindsApiPokemonToPokemonMapper(
+        mapper: ApiPokemonToPokemonMapper
+    ): Mapper<ApiPokemon, Pokemon>
+
+    @Binds
+    fun bindsApiPokemonTypeToPokemonTypeMapper(
+        mapper: ApiPokemonTypeToPokemonTypeMapper
+    ): Mapper<ApiPokemonType, PokemonType>
 }

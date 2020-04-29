@@ -1,13 +1,9 @@
 package com.example.desafiopokedex.graph.module
 
 import androidx.lifecycle.ViewModelProvider
-import com.example.data.repository.GetListResultRepositoryImpl
-import com.example.data.repository.GetPokemonDetailRepositoryImpl
-import com.example.data.repository.GetSpritesRepositoryImpl
+import com.example.data.repository.*
 import com.example.desafiopokedex.view.base.ViewModelFactory
-import com.example.domain.repository.GetListResultRepository
-import com.example.domain.repository.GetPokemonDetailRepository
-import com.example.domain.repository.GetSpritesRepository
+import com.example.domain.repository.*
 import dagger.Binds
 import dagger.Module
 
@@ -22,6 +18,12 @@ interface ApplicationBindModule {
 
     @Binds
     fun bindsGetPokemonDetailRepository(repository: GetPokemonDetailRepositoryImpl): GetPokemonDetailRepository
+
+    @Binds
+    fun bindsGetAbilityRepository(repository: GetAbilityRepositoryImpl): GetAbilityRepository
+
+    @Binds
+    fun bindsGetSamePokemonTypeRepository(repository: GetSamePokemonTypeRepositoryImpl): GetSamePokemonTypeRepository
 
     @Binds
     fun bindsViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
