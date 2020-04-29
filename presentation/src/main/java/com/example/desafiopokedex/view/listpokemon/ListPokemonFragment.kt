@@ -17,7 +17,7 @@ class ListPokemonFragment : BaseFragment() {
 
     private lateinit var binding: FragmentListPokemonBinding
     private lateinit var viewModel: ListPokemonViewModel
-    private val adapterList: ListPokemonAdapter = ListPokemonAdapter()
+    private val adapterList: ListPokemonAdapter = ListPokemonAdapter { callbackClick(it) }
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -55,5 +55,10 @@ class ListPokemonFragment : BaseFragment() {
             val decor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decor)
         }
+    }
+
+    private fun callbackClick(name: String) {
+        directions = ListPokemonFragmentDirections.pokemonListToPokemonDetail(name)
+        controller.navigate(directions)
     }
 }

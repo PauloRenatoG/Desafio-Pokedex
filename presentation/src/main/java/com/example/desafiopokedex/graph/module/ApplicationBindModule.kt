@@ -2,6 +2,7 @@ package com.example.desafiopokedex.graph.module
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.repository.GetListResultRepositoryImpl
+import com.example.data.repository.GetPokemonDetailRepositoryImpl
 import com.example.data.repository.GetSpritesRepositoryImpl
 import com.example.desafiopokedex.view.base.ViewModelFactory
 import com.example.domain.repository.GetListResultRepository
@@ -20,7 +21,7 @@ interface ApplicationBindModule {
     fun bindsGetSpritesRepository(repository: GetSpritesRepositoryImpl): GetSpritesRepository
 
     @Binds
-    fun bindsGetPokemonDetailRepository(repository: GetPokemonDetailRepository): GetPokemonDetailRepository
+    fun bindsGetPokemonDetailRepository(repository: GetPokemonDetailRepositoryImpl): GetPokemonDetailRepository
 
     @Binds
     fun bindsViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
