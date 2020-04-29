@@ -1,5 +1,7 @@
 package com.example.data.client
 
+import com.example.data.entities.ApiEffectEntries
+import com.example.data.entities.ApiListPokemonType
 import com.example.data.entities.ApiPokemonDetail
 import com.example.data.entities.ApiResponse
 import com.example.data.util.RequestHandler
@@ -26,6 +28,18 @@ class ApiClient @Inject constructor(
     suspend fun getPokemonDetail(name: String): ApiPokemonDetail? {
         return withContext(Dispatchers.IO) {
             makeRequest(apiService.getPokemonDetail(name))
+        }
+    }
+
+    suspend fun getAbility(name: String): ApiEffectEntries? {
+        return withContext(Dispatchers.IO) {
+            makeRequest(apiService.getAbility(name))
+        }
+    }
+
+    suspend fun getSamePokemonTypes(name: String): ApiListPokemonType? {
+        return withContext(Dispatchers.IO) {
+            makeRequest(apiService.getSamePokemonTypes(name))
         }
     }
 }
