@@ -9,5 +9,18 @@
         android:id="@+id/listPokemonFragment"
         android:name="com.example.desafiopokedex.view.listpokemon.ListPokemonFragment"
         android:label="ListPokemonFragment"
-        tools:layout="@layout/fragment_list_pokemon" />
+        tools:layout="@layout/fragment_list_pokemon">
+        <action
+            android:id="@+id/pokemonList_to_pokemonDetail"
+            app:destination="@id/pokemonDetailFragment"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.example.desafiopokedex.view.pokemondetail.PokemonDetailFragment"
+        android:label="PokemonDetailFragment">
+        <argument
+            android:name="pokemonName"
+            app:argType="string" />
+    </fragment>
 </navigation>
