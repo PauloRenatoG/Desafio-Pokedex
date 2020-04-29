@@ -1,5 +1,6 @@
 package com.example.desafiopokedex.view.pokemondetail
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,18 +8,21 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import com.example.desafiopokedex.R
 import com.example.desafiopokedex.databinding.FragmentPokemonDetailBinding
 import com.example.desafiopokedex.util.viewModelProvider
 import com.example.desafiopokedex.view.base.BaseFragment
 import com.example.desafiopokedex.view.pokemondetail.recyclerability.PokemonAbilityATypeAdapter
+import com.example.desafiopokedex.view.pokemondetail.recyclersametypepokemon.ListPokemonSameTypeAdapter
 import com.example.desafiopokedex.view.pokemondetail.recyclersprites.PokemonSpriteAdapter
-import com.example.domain.entity.Ability
-import com.example.domain.entity.Sprites
-import com.example.domain.entity.Type
+import com.example.domain.entity.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.bottom_sheet_list_same_type_pokemon.*
 import javax.inject.Inject
 import kotlin.math.abs
 
@@ -30,6 +34,7 @@ class PokemonDetailFragment : BaseFragment() {
     private val name: String by lazy { nav.pokemonName }
     private val listSprites: MutableList<String> = mutableListOf()
     private lateinit var adapterList: PokemonAbilityATypeAdapter
+    private lateinit var bottomSheet: BottomSheetDialog
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -51,17 +56,27 @@ class PokemonDetailFragment : BaseFragment() {
         with(viewModel) {
             onCreate(name)
             pokemonDetail.observe(viewLifecycleOwner, Observer { pokemon ->
-                binding.textName.text = pokemon.name
-                binding.textStack.text = pokemon.stats
-                    ?.map {
-                        it.stat?.name
-                    }?.joinToString(separator = ", ")
-                pokemon.sprites?.let { convertSpritesToList(it) }
-                setupViewPager()
-                setupRecyclerAbility(pokemon.abilities)
-                setupRecyclerType(pokemon.types)
+                setupBinding(pokemon)
+            })
+            ability.observe(viewLifecycleOwner, Observer { effectEntry ->
+                setDialogAbilityDescription(effectEntry.effectEntries?.get(0)?.effect)
+            })
+            samePokemonType.observe(viewLifecycleOwner, Observer {
+                setDialogTypeDescription(it)
             })
         }
+    }
+
+    private fun setupBinding(pokemon: PokemonDetail) {
+        binding.textName.text = pokemon.name
+        binding.textStack.text = pokemon.stats
+            ?.map {
+                it.stat?.name
+            }?.joinToString(separator = ", ")
+        pokemon.sprites?.let { convertSpritesToList(it) }
+        setupViewPager()
+        setupRecyclerAbility(pokemon.abilities)
+        setupRecyclerType(pokemon.types)
     }
 
     private fun setupViewPager() {
@@ -84,7 +99,11 @@ class PokemonDetailFragment : BaseFragment() {
     }
 
     private fun setupRecyclerAbility(abilities: List<Ability>?) {
-        adapterList = PokemonAbilityATypeAdapter(abilities?.map { it.ability?.name })
+        adapterList =
+            PokemonAbilityATypeAdapter(
+                abilities?.map { it.ability?.name },
+                viewModel::getAbility
+            )
         with(binding.recyclerAbility) {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = adapterList
@@ -92,10 +111,39 @@ class PokemonDetailFragment : BaseFragment() {
     }
 
     private fun setupRecyclerType(type: List<Type>?) {
-        adapterList = PokemonAbilityATypeAdapter(type?.map { it.type?.name })
+        adapterList = PokemonAbilityATypeAdapter(
+            type?.map { it.type?.name },
+            viewModel::getType
+        )
         with(binding.recyclerType) {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = adapterList
+        }
+    }
+
+    private fun setDialogAbilityDescription(message: String?) {
+        AlertDialog
+            .Builder(context)
+            .setTitle(R.string.ability)
+            .setMessage(message)
+            .setPositiveButton(R.string.global_ok) { _, _ -> }
+            .show()
+    }
+
+    private fun setDialogTypeDescription(listPokemonType: ListPokemonType) {
+        context?.let {
+            bottomSheet = BottomSheetDialog(
+                it,
+                R.style.BottomSheetDialogTheme
+            )
+            bottomSheet.setContentView(R.layout.bottom_sheet_list_same_type_pokemon)
+            with(bottomSheet.recycler_same_type) {
+                layoutManager = LinearLayoutManager(context)
+                adapter = ListPokemonSameTypeAdapter(listPokemonType.pokemon)
+                val decor = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+                addItemDecoration(decor)
+            }
+            bottomSheet.show()
         }
     }
 

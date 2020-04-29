@@ -4,13 +4,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class PokemonAbilityATypeAdapter(
-    private val list: List<String?>?
+    private val list: List<String?>?,
+    private val callbackClicked: (String) -> Unit
 ) : RecyclerView.Adapter<PokemonAbilityAndTypeViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): PokemonAbilityAndTypeViewHolder {
-        return PokemonAbilityAndTypeViewHolder.inflate(parent)
+        return PokemonAbilityAndTypeViewHolder.inflate(parent, callbackClicked)
     }
 
     override fun onBindViewHolder(holder: PokemonAbilityAndTypeViewHolder, position: Int) {
