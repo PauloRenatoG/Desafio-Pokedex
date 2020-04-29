@@ -17,4 +17,7 @@ interface ApiService {
 
     @GET("pokemon/{name}/")
     suspend fun getSprites(@Path("name") name: String): Response<ApiPokemonDetail>
+
+    @GET("pokemon/{name}/")
+    suspend fun getPokemonDetail(@Path("name") name: String): Response<ApiPokemonDetail>
 }

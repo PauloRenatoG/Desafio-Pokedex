@@ -9,7 +9,7 @@ data class ApiPokemonDetail(
     @SerializedName("base_experience")
     val baseExperience: Int? = null,
     @SerializedName("forms")
-    val forms: List<ApiForm>? = null,
+    val forms: List<ApiFormUrl>? = null,
     @SerializedName("game_indices")
     val gameIndices: List<ApiGameIndice>? = null,
     @SerializedName("height")

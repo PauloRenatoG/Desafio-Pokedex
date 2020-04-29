@@ -22,4 +22,10 @@ class ApiClient @Inject constructor(
             makeRequest(apiService.getSprites(name))
         }
     }
+
+    suspend fun getPokemonDetail(name: String): ApiPokemonDetail? {
+        return withContext(Dispatchers.IO) {
+            makeRequest(apiService.getPokemonDetail(name))
+        }
+    }
 }
