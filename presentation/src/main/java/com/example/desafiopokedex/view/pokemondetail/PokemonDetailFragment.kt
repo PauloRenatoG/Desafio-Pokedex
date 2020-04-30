@@ -31,10 +31,10 @@ class PokemonDetailFragment : BaseFragment() {
     private lateinit var binding: FragmentPokemonDetailBinding
     private lateinit var viewModel: PokemonDetailViewModel
     private val nav by navArgs<PokemonDetailFragmentArgs>()
-    private val name: String by lazy { nav.pokemonName }
     private val listSprites: MutableList<String> = mutableListOf()
     private lateinit var adapterList: PokemonAbilityATypeAdapter
     private lateinit var bottomSheet: BottomSheetDialog
+    val name: String by lazy { nav.pokemonName }
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -49,12 +49,12 @@ class PokemonDetailFragment : BaseFragment() {
 
         viewModel = viewModelProvider(viewModelFactory)
         subscribeUI()
+        lifecycle.addObserver(viewModel)
         return binding.root
     }
 
     private fun subscribeUI() {
         with(viewModel) {
-            onCreate(name)
             pokemonDetail.observe(viewLifecycleOwner, Observer { pokemon ->
                 setupBinding(pokemon)
             })

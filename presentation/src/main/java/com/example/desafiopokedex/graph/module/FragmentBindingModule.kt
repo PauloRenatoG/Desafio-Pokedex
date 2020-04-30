@@ -5,6 +5,7 @@ import com.example.desafiopokedex.view.listpokemon.ListPokemonFragment
 import com.example.desafiopokedex.view.listpokemon.ListPokemonProvider
 import com.example.desafiopokedex.view.pokemondetail.PokemonDetailFragment
 import com.example.desafiopokedex.view.pokemondetail.PokemonDetailProvider
+import com.example.desafiopokedex.view.pokemondetail.PokemonDetailProviderName
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,6 +17,6 @@ interface FragmentBindingModule {
     fun contributeListPokemonFragment(): ListPokemonFragment
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = [PokemonDetailProvider::class])
+    @ContributesAndroidInjector(modules = [PokemonDetailProvider::class, PokemonDetailProviderName::class])
     fun contributePokemonDetailFragment(): PokemonDetailFragment
 }
