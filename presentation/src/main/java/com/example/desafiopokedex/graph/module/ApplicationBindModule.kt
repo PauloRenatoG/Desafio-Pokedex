@@ -26,5 +26,8 @@ interface ApplicationBindModule {
     fun bindsGetSamePokemonTypeRepository(repository: GetSamePokemonTypeRepositoryImpl): GetSamePokemonTypeRepository
 
     @Binds
+    fun bindsGetEvolutionRepository(repository: GetEvolutionRepositoryImpl): GetEvolutionRepository
+
+    @Binds
     fun bindsViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }

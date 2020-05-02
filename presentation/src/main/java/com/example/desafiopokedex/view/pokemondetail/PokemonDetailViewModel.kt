@@ -7,9 +7,11 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.example.desafiopokedex.util.NAME_POKEMON
 import com.example.desafiopokedex.view.base.BaseViewModel
 import com.example.domain.entity.EffectEntries
+import com.example.domain.entity.Evolution
 import com.example.domain.entity.ListPokemonType
 import com.example.domain.entity.PokemonDetail
 import com.example.domain.usecase.GetAbility
+import com.example.domain.usecase.GetEvolution
 import com.example.domain.usecase.GetPokemonDetail
 import com.example.domain.usecase.GetSamePokemonType
 import javax.inject.Inject
@@ -19,6 +21,7 @@ class PokemonDetailViewModel @Inject constructor(
     private val getPokemonDetail: GetPokemonDetail,
     private val getAbility: GetAbility,
     private val getSamePokemonType: GetSamePokemonType,
+    private val getEvolution: GetEvolution,
     @Named(NAME_POKEMON) private val name: String
 ) : BaseViewModel() {
 
@@ -30,6 +33,9 @@ class PokemonDetailViewModel @Inject constructor(
 
     val samePokemonType: LiveData<ListPokemonType> get() = _samePokemonType
     private val _samePokemonType: MutableLiveData<ListPokemonType> = MutableLiveData()
+
+    val evolution: LiveData<Evolution> get() = _evolution
+    private val _evolution: MutableLiveData<Evolution> = MutableLiveData()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {
@@ -53,6 +59,14 @@ class PokemonDetailViewModel @Inject constructor(
             block = { getSamePokemonType.execute(name) },
             onSuccess = { _samePokemonType.postValue(it) },
             onFailure = { onFailure(it) }
+        )
+    }
+
+    internal fun getEvolution(id: Int) {
+        asyncScope(
+            block = { getEvolution.execute(id) },
+            onSuccess = { _evolution.postValue(it) },
+            onFailure = { }
         )
     }
 

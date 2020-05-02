@@ -57,6 +57,7 @@ class PokemonDetailFragment : BaseFragment() {
         with(viewModel) {
             pokemonDetail.observe(viewLifecycleOwner, Observer { pokemon ->
                 setupBinding(pokemon)
+                pokemon.id?.let { viewModel.getEvolution(it) }
             })
             ability.observe(viewLifecycleOwner, Observer { effectEntry ->
                 setDialogAbilityDescription(effectEntry.effectEntries?.get(0)?.effect)
@@ -64,7 +65,23 @@ class PokemonDetailFragment : BaseFragment() {
             samePokemonType.observe(viewLifecycleOwner, Observer {
                 setDialogTypeDescription(it)
             })
+            evolution.observe(viewLifecycleOwner, Observer { evolution ->
+                setupEvolution(evolution)
+            })
         }
+    }
+
+    private fun setupEvolution(evolution: Evolution) {
+        binding.textEvolution.text =
+            listOf(evolution.chain?.speciesUrl?.name,
+                evolution.chain?.evolvesTo?.let {
+                    if (!it.isNullOrEmpty()) it[0].speciesUrl.name else ""
+                },
+                evolution.chain?.evolvesTo?.get(0)?.evolvesTo?.let {
+                    if (!it.isNullOrEmpty()) it[0].speciesUrl.name else ""
+                }
+            ).joinToString(", ")
+
     }
 
     private fun setupBinding(pokemon: PokemonDetail) {

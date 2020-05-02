@@ -149,4 +149,24 @@ interface MapperModule {
     fun bindsApiPokemonTypeToPokemonTypeMapper(
         mapper: ApiPokemonTypeToPokemonTypeMapper
     ): Mapper<ApiPokemonType, PokemonType>
+
+    @Binds
+    fun bindsApiEvolutionToEvolutionMapper(
+        mapper: ApiEvolutionToEvolutionMapper
+    ): Mapper<ApiEvolution, Evolution>
+
+    @Binds
+    fun bindsApiChainToChainMapper(
+        mapper: ApiChainToChainMapper
+    ): Mapper<ApiChain, Chain>
+
+    @Binds
+    fun bindsApiSecondChainToSecondChainMapper(
+        mapper: ApiSecondChainToSecondChainMapper
+    ): Mapper<ApiSecondChain, SecondChain>
+
+    @Binds
+    fun bindsApiThirdChainToThirdChainMapper(
+        mapper: ApiThirdChainToThirdChainMapper
+    ): Mapper<ApiThirdChain, ThirdChain>
 }
