@@ -66,11 +66,11 @@ class PokemonDetailViewModel @Inject constructor(
         asyncScope(
             block = { getEvolution.execute(id) },
             onSuccess = { _evolution.postValue(it) },
-            onFailure = { }
+            onFailure = { onFailure(it) }
         )
     }
 
-    private fun onFailure(throwable: String) {
-
+    private fun onFailure(throwable: Throwable) {
+        setError(throwable)
     }
 }
