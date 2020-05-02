@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Desafio Pokedex</string>
+    <string name="stack">Stacks</string>
+    <string name="abilities">Abilities</string>
+    <string name="ability">Ability</string>
+    <string name="type">Type</string>
+    <string name="global_ok">Ok</string>
+    <string name="pok_mons_same_type">Pokémons same type</string>
+    <string name="evolution">Evolution</string>
+    <string name="error">Error!</string>
+</resources>
