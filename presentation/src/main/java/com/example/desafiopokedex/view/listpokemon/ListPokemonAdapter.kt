@@ -5,10 +5,12 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.domain.entity.ListNameSprite
 
-class ListPokemonAdapter : PagedListAdapter<ListNameSprite, ListPokemonViewHolder>(DIFF_CALLBACK) {
+class ListPokemonAdapter(
+    private val callBackClick: (String) -> Unit
+) : PagedListAdapter<ListNameSprite, ListPokemonViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPokemonViewHolder {
-        return ListPokemonViewHolder.inflate(parent)
+        return ListPokemonViewHolder.inflate(parent, callBackClick)
     }
 
     override fun onBindViewHolder(holder: ListPokemonViewHolder, position: Int) {
