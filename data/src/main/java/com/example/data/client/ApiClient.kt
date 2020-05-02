@@ -1,9 +1,6 @@
 package com.example.data.client
 
-import com.example.data.entities.ApiEffectEntries
-import com.example.data.entities.ApiListPokemonType
-import com.example.data.entities.ApiPokemonDetail
-import com.example.data.entities.ApiResponse
+import com.example.data.entities.*
 import com.example.data.util.RequestHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -40,6 +37,12 @@ class ApiClient @Inject constructor(
     suspend fun getSamePokemonTypes(name: String): ApiListPokemonType? {
         return withContext(Dispatchers.IO) {
             makeRequest(apiService.getSamePokemonTypes(name))
+        }
+    }
+
+    suspend fun getEvolution(id: Int): ApiEvolution? {
+        return withContext(Dispatchers.IO) {
+            makeRequest(apiService.getEvolution(id))
         }
     }
 }

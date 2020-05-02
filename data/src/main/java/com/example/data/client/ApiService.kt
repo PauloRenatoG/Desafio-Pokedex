@@ -1,9 +1,6 @@
 package com.example.data.client
 
-import com.example.data.entities.ApiEffectEntries
-import com.example.data.entities.ApiListPokemonType
-import com.example.data.entities.ApiPokemonDetail
-import com.example.data.entities.ApiResponse
+import com.example.data.entities.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -28,4 +25,7 @@ interface ApiService {
 
     @GET("type/{name}")
     suspend fun getSamePokemonTypes(@Path("name") name: String): Response<ApiListPokemonType>
+
+    @GET("evolution-chain/{id}/")
+    suspend fun getEvolution(@Path("id") id: Int): Response<ApiEvolution>
 }
