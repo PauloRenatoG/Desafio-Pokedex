@@ -6,4 +6,5 @@
     <string name="type">Type</string>
     <string name="global_ok">Ok</string>
     <string name="pok_mons_same_type">Pokémons same type</string>
+    <string name="evolution">Evolution</string>
 </resources>
