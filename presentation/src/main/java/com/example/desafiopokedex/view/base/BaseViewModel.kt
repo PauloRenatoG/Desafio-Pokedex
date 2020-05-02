@@ -1,17 +1,17 @@
 package com.example.desafiopokedex.view.base
 
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel(), LifecycleObserver {
 
+    val error: LiveData<String> get() = _error
+    private val _error: MutableLiveData<String> = MutableLiveData()
 
     internal fun <T> asyncScope(
         block: suspend () -> T,
         onSuccess: (T) -> Unit,
-        onFailure: ((String) -> Unit)? = null
+        onFailure: ((Throwable) -> Unit)? = null
     ) {
         viewModelScope.launch {
             runCatching {
@@ -19,8 +19,12 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
             }.onSuccess {
                 onSuccess(it)
             }.onFailure {
-                it.message?.let { message -> onFailure?.invoke(message) }
+                onFailure?.invoke(it)
             }
         }
+    }
+
+    internal fun setError(throwable: Throwable) {
+        _error.postValue(throwable.message)
     }
 }

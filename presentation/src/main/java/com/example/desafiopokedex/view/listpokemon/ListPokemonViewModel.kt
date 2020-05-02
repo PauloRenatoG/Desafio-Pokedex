@@ -39,6 +39,6 @@ class ListPokemonViewModel @Inject constructor(
         .build()
 
     private fun onFailure(throwable: Throwable) {
-
+        setError(throwable)
     }
 }

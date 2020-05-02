@@ -48,6 +48,7 @@ class PokemonDetailFragment : BaseFragment() {
         binding = FragmentPokemonDetailBinding.inflate(inflater, container, false)
 
         viewModel = viewModelProvider(viewModelFactory)
+        baseViewModel = viewModel
         subscribeUI()
         lifecycle.addObserver(viewModel)
         return binding.root
@@ -67,6 +68,10 @@ class PokemonDetailFragment : BaseFragment() {
             })
             evolution.observe(viewLifecycleOwner, Observer { evolution ->
                 setupEvolution(evolution)
+            })
+
+            error.observe(viewLifecycleOwner, Observer { error ->
+                setDialogError(error)
             })
         }
     }

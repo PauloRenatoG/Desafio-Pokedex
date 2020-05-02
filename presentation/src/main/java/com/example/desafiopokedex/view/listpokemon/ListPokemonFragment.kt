@@ -31,6 +31,7 @@ class ListPokemonFragment : BaseFragment() {
         binding = FragmentListPokemonBinding.inflate(inflater, container, false)
 
         viewModel = viewModelProvider(viewModelFactory)
+        baseViewModel = viewModel
         lifecycle.addObserver(viewModel)
         setupRecycler()
         subscribeUI()
@@ -38,14 +39,20 @@ class ListPokemonFragment : BaseFragment() {
     }
 
     private fun subscribeUI() {
-        viewModel.listPokemon.observe(viewLifecycleOwner, Observer { list ->
-            adapterList.submitList(list)
-        })
+        with(viewModel) {
+            listPokemon.observe(viewLifecycleOwner, Observer { list ->
+                adapterList.submitList(list)
+            })
 
-        viewModel.loadingProgressBar.observe(viewLifecycleOwner, Observer { loading ->
-            if (loading) binding.progressLoading.visibility = View.VISIBLE
-            else binding.progressLoading.visibility = View.GONE
-        })
+            loadingProgressBar.observe(viewLifecycleOwner, Observer { loading ->
+                if (loading) binding.progressLoading.visibility = View.VISIBLE
+                else binding.progressLoading.visibility = View.GONE
+            })
+
+            error.observe(viewLifecycleOwner, Observer { error ->
+                setDialogError(error)
+            })
+        }
     }
 
     private fun setupRecycler() {
